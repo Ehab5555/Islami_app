@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:islami/app_theme.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RadioTab extends StatefulWidget {
   @override
@@ -9,6 +12,7 @@ class RadioTab extends StatefulWidget {
 class _RadioTabState extends State<RadioTab> {
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of<SettingsProvider>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -17,35 +21,35 @@ class _RadioTabState extends State<RadioTab> {
           height: 30,
         ),
         Text(
-          'اذاعة القرأن الكريم',
+          AppLocalizations.of(context)!.radioname,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         const SizedBox(
           height: 30,
         ),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.skip_previous_sharp,
               size: 40,
-              color: AppTheme.lightPrimary,
+              color: provider.isDark ? AppTheme.gold : AppTheme.lightPrimary,
             ),
-            SizedBox(
+            const SizedBox(
               width: 30,
             ),
             Icon(
               Icons.play_arrow,
               size: 40,
-              color: AppTheme.lightPrimary,
+              color: provider.isDark ? AppTheme.gold : AppTheme.lightPrimary,
             ),
-            SizedBox(
+            const SizedBox(
               width: 30,
             ),
             Icon(
               Icons.skip_next_sharp,
               size: 40,
-              color: AppTheme.lightPrimary,
+              color: provider.isDark ? AppTheme.gold : AppTheme.lightPrimary,
             ),
           ],
         )

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami/app_theme.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class SebhaTab extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class _SebhaTabState extends State<SebhaTab> {
   String sehabTitle = 'سبحان الله';
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of<SettingsProvider>(context);
     return Column(
       children: [
         Stack(
@@ -19,7 +22,9 @@ class _SebhaTabState extends State<SebhaTab> {
             Container(
               margin: const EdgeInsets.only(left: 40),
               child: Image.asset(
-                'assets/images/head_sebha_logo.png',
+                provider.isDark
+                    ? 'assets/images/head_sebha_dark.png'
+                    : 'assets/images/head_sebha_logo.png',
               ),
             ),
             Container(
@@ -27,7 +32,9 @@ class _SebhaTabState extends State<SebhaTab> {
                 top: MediaQuery.of(context).size.height * 0.07,
               ),
               child: Image.asset(
-                'assets/images/body_sebha_logo.png',
+                provider.isDark
+                    ? 'assets/images/body_sebha_dark.png'
+                    : 'assets/images/body_sebha_logo.png',
                 height: MediaQuery.of(context).size.height * 0.3,
               ),
             ),
@@ -37,10 +44,12 @@ class _SebhaTabState extends State<SebhaTab> {
           height: 30,
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: AppTheme.lightPrimary.withOpacity(0.5)),
+              color: provider.isDark
+                  ? AppTheme.darkPrimary.withOpacity(0.5)
+                  : AppTheme.lightPrimary.withOpacity(0.5)),
           child: Text(
             '$number',
             style: Theme.of(context).textTheme.headlineSmall,
@@ -67,7 +76,7 @@ class _SebhaTabState extends State<SebhaTab> {
               child: Text(
                 sehabTitle,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: AppTheme.white,
+                      color: provider.isDark ? AppTheme.black : AppTheme.white,
                     ),
               )),
         )

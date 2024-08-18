@@ -4,6 +4,9 @@ import 'package:islami/tabs/quran/quran_tab.dart';
 import 'package:islami/tabs/radio/radio_tab.dart';
 import 'package:islami/tabs/sebha/sebha_tab.dart';
 import 'package:islami/tabs/settings/setting_tab.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/';
@@ -25,14 +28,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of<SettingsProvider>(context);
+    AppLocalizations localizations = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/default_bg.png'))),
+        image: DecorationImage(
+          image: AssetImage(provider.themeMode == ThemeMode.light
+              ? 'assets/images/default_bg.png'
+              : 'assets/images/dark_bg.png'),
+        ),
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text('Islami'),
+          title: Text(localizations.islami),
         ),
         body: tabs[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -42,34 +51,34 @@ class _HomeScreenState extends State<HomeScreen> {
               currentIndex = value;
               setState(() {});
             },
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: ImageIcon(
+                icon: const ImageIcon(
                   AssetImage('assets/images/icon_quran.png'),
                 ),
-                label: 'Quran',
+                label: localizations.quran,
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(
+                icon: const ImageIcon(
                   AssetImage('assets/images/icon_hadeth.png'),
                 ),
-                label: 'Hadeth',
+                label: localizations.hadeth,
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(
+                icon: const ImageIcon(
                   AssetImage('assets/images/icon_sebha.png'),
                 ),
-                label: 'Sebha',
+                label: localizations.sebha,
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(
+                icon: const ImageIcon(
                   AssetImage('assets/images/icon_radio.png'),
                 ),
-                label: 'Radio',
+                label: localizations.radio,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'Settings',
+                icon: const Icon(Icons.settings),
+                label: localizations.settings,
               ),
             ]),
       ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:islami/app_theme.dart';
 import 'package:islami/tabs/quran/quran_sura.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuranTab extends StatefulWidget {
   @override
@@ -243,6 +245,8 @@ class _QuranTabState extends State<QuranTab> {
   ];
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of<SettingsProvider>(context);
+    AppLocalizations localizations = AppLocalizations.of(context)!;
     return Column(
       children: [
         Image.asset('assets/images/qur2an_screen_logo.png'),
@@ -251,8 +255,14 @@ class _QuranTabState extends State<QuranTab> {
         ),
         Table(
           border: TableBorder.symmetric(
-              outside: BorderSide(width: 3, color: AppTheme.lightPrimary),
-              inside: BorderSide(width: 3, color: AppTheme.lightPrimary)),
+              outside: BorderSide(
+                  width: 3,
+                  color:
+                      provider.isDark ? AppTheme.gold : AppTheme.lightPrimary),
+              inside: BorderSide(
+                  width: 3,
+                  color:
+                      provider.isDark ? AppTheme.gold : AppTheme.lightPrimary)),
           children: [
             TableRow(
               children: [
@@ -260,7 +270,7 @@ class _QuranTabState extends State<QuranTab> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'عدد الأيات',
+                      localizations.ayat,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
@@ -269,7 +279,7 @@ class _QuranTabState extends State<QuranTab> {
                 TableCell(
                   verticalAlignment: TableCellVerticalAlignment.middle,
                   child: Text(
-                    'اسم السورة',
+                    localizations.sura,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
@@ -282,9 +292,9 @@ class _QuranTabState extends State<QuranTab> {
           child: ListView.builder(
             itemBuilder: (_, index) => Table(
               border: TableBorder.symmetric(
-                  inside: const BorderSide(
+                  inside: BorderSide(
                 width: 3,
-                color: AppTheme.lightPrimary,
+                color: provider.isDark ? AppTheme.gold : AppTheme.lightPrimary,
               )),
               children: [
                 TableRow(children: [
@@ -301,7 +311,7 @@ class _QuranTabState extends State<QuranTab> {
                         child: Text(
                           '${suraAyatNumber[index]}',
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
                     ),
@@ -319,7 +329,7 @@ class _QuranTabState extends State<QuranTab> {
                       child: Text(
                         surasNames[index],
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
                   ),
