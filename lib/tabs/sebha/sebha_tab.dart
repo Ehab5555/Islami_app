@@ -4,6 +4,8 @@ import 'package:islami/tabs/settings/settings_provider.dart';
 import 'package:provider/provider.dart';
 
 class SebhaTab extends StatefulWidget {
+  const SebhaTab({super.key});
+
   @override
   State<SebhaTab> createState() => _SebhaTabState();
 }
@@ -48,8 +50,8 @@ class _SebhaTabState extends State<SebhaTab> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: provider.isDark
-                  ? AppTheme.darkPrimary.withOpacity(0.5)
-                  : AppTheme.lightPrimary.withOpacity(0.5)),
+                  ? AppTheme.darkPrimary.withValues(alpha: 0.5)
+                  : AppTheme.lightPrimary.withValues(alpha: 0.5)),
           child: Text(
             '$number',
             style: Theme.of(context).textTheme.headlineSmall,

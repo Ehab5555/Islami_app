@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 class HadethDetails extends StatefulWidget {
   static const String routeName = 'hadethdetails';
 
+  const HadethDetails({super.key});
+
   @override
   State<HadethDetails> createState() => _HadethDetailsState();
 }

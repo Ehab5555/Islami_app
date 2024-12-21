@@ -12,19 +12,21 @@ void main() {
       create: (_) => SettingsProvider()
         ..getThemeMode()
         ..getLang(),
-      child: IslamiApp()));
+      child: const IslamiApp()));
 }
 
 class IslamiApp extends StatelessWidget {
+  const IslamiApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     SettingsProvider provider = Provider.of<SettingsProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        HomeScreen.routeName: (_) => HomeScreen(),
-        QuranSura.routeName: (_) => QuranSura(),
-        HadethDetails.routeName: (_) => HadethDetails(),
+        HomeScreen.routeName: (_) => const HomeScreen(),
+        QuranSura.routeName: (_) => const QuranSura(),
+        HadethDetails.routeName: (_) => const HadethDetails(),
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

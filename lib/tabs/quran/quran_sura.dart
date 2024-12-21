@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 class QuranSura extends StatefulWidget {
   static const String routeName = 'quransura';
 
+  const QuranSura({super.key});
+
   @override
   State<QuranSura> createState() => _QuranSuraState();
 }
